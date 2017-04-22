@@ -11,7 +11,9 @@ def KMeans(sets):
     
     for i in range(MAX_ITERATION):
         for k in range(CLUSTER_NUMBER):
-            cogs[k] = np.mean(sets[cluster_ids == k], axis = 0)
+            #テスト完了後追記↓
+            if(np.sum(cluster_ids == k) > 0):
+                cogs[k] = np.mean(sets[cluster_ids == k], axis = 0)
 
         new_ids = np.array([np.argmin(np.sum(abs((data - cogs)), axis = 1)) for data in sets])
 
@@ -23,6 +25,6 @@ def KMeans(sets):
     return (cluster_ids,cogs)
 
 question = np.random.rand(100,2)
-#a,b = KMeans(question)
-#print(a)
-#print(b)
+a,b = KMeans(question)
+print(a)
+print(b)
