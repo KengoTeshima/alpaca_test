@@ -46,9 +46,8 @@ def normalize(exchange):
     t = exchange.T
     #列のサイズを求める
     N = t.shape[0]
-    #正規化（転置行列の行文繰り返す）
-    for i in range(0,N):
-        t[i] = (t[i] - np.amin(t[i])) / np.ptp(t[i])
+    #正規化
+    t = (t - np.amin(t)) / np.ptp(t)
     #転置を戻してリターン
     return t.T
 
@@ -59,7 +58,6 @@ def restore(y_restore,y_data):
     t_t = y_restore.T
     #列のサイズを求める
     N = t_t.shape[0]
-    #復元（転置行列の行文繰り返す）
-    for i in range(0,N):
-        y_t[i] = (y_t[i] * np.ptp(t_t[i])) + np.amin(t_t[i])
+    #復元
+    y_t = (y_t * np.ptp(t_t)) + np.amin(t_t)
     return y_t.T
