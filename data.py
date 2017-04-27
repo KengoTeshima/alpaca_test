@@ -42,21 +42,16 @@ def load_teach_data(country):
 
 #国ごとにデータの正規化
 def normalize(exchange):
-    #転置行列の作成
     t = exchange.T
-    #列のサイズを求める
     N = t.shape[0]
     #正規化
     t = (t - np.amin(t)) / np.ptp(t)
-    #転置を戻してリターン
     return t.T
 
 #正規化したデータを復元
 def restore(y_restore,y_data):
-    #転置行列の作成
     y_t = y_data.T
     t_t = y_restore.T
-    #列のサイズを求める
     N = t_t.shape[0]
     #復元
     y_t = (y_t * np.ptp(t_t)) + np.amin(t_t)
